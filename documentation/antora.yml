@@ -1,7 +1,0 @@
-name: rhel-containers
-title: Despliegue y gestión de contenedores en RHEL
-version: master
-nav:
-  - modules/ROOT/nav.adoc
-
-start_page: ROOT:index.adoc
