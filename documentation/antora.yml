@@ -1,5 +1,5 @@
-name: template-tutorial
-title: Template Tutorial
+name: rhel-containers
+title: Despliegue y gestión de contenedores en RHEL
 version: master
 nav:
   - modules/ROOT/nav.adoc

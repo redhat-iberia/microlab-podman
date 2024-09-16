@@ -2,9 +2,9 @@ runtime:
   cache_dir: ./.cache/antora
 
 site:
-  title: Template Tutorial
-  url: https://redhat-scholars.github.io/course-template
-  start_page: template-tutorial::index.adoc
+  title: Despliegue y gestión de contenedores en RHEL
+  url: https://redhat-iberia.github.io/rhel-containers
+  start_page: rhel-containers::index.adoc
 
 content:
   sources:
