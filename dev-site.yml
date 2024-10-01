@@ -3,7 +3,7 @@ runtime:
 
 site:
   title: Despliegue y gestión de contenedores en RHEL
-  url: http://localhost:3000/rhs-build-course/index.html
+  url: http://localhost:3000/rhel-containers/index.html
   start_page: rhel-containers::index.adoc
 
 content:
@@ -13,7 +13,6 @@ content:
       start_path: documentation
 asciidoc:
   attributes:
-    title: Despliegue y gestión de contenedores en RHEL
   extensions:
     - ./lib/remote-include-processor.js
     - ./lib/tab-block.js

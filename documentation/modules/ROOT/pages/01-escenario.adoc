@@ -1,0 +1,28 @@
+= Escenario
+include::_attributes.adoc[]
+
+Eres un miembro del equipo de QA de **Retrogaming S.A.**, una empresa de desarrollo de videojuegos _retros_, para lanzar un Tetris web. 
+
+[#app]
+== Tetris
+
+La aplicación del videjuego está contenerizada en `HTML` y `Javascript`. Los desarrolladores comparten el código de la imágenes: el `Containerfile` junto con los archivos necesarios. Como era de esperar, tendrás varias versiones del Tetris, algunas de las cuales contengan errores y fallen.
+
+[source]
+----
+v1.0/
+├── app
+│   ├── index.html
+│   ├── stats.js
+│   └── texture.jpg
+├── Containerfile
+├── LICENSE
+└── README.md
+----
+
+image::tetris.png[]
+
+[#ulab]
+== Microlaboratorio
+
+Tu trabajo consiste en crear y deplegar los contenedores, y lo más importante y divertido: probar cada versión del Tetris. Para hacer más fácil tu trabajo, y que puedas centrarte en dar valor como QA probando videojuegos, harás uso de dos funcionalidades de Podman: `podman auto-update` y `rollbacks automáticos`.
