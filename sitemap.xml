@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
-<loc>https://redhat-iberia.github.io/rhel-containers/rhel-containers/01-Introduccion.html</loc>
-<lastmod>2024-09-16T14:27:13.109Z</lastmod>
+<loc>https://redhat-iberia.github.io/rhel-containers/rhel-containers/01-escenario.html</loc>
+<lastmod>2024-10-01T14:24:57.753Z</lastmod>
 </url>
 <url>
-<loc>https://redhat-iberia.github.io/rhel-containers/rhel-containers/01-setup.html</loc>
-<lastmod>2024-09-16T14:27:13.109Z</lastmod>
+<loc>https://redhat-iberia.github.io/rhel-containers/rhel-containers/02-podman-auto-update.html</loc>
+<lastmod>2024-10-01T14:24:57.753Z</lastmod>
 </url>
 <url>
-<loc>https://redhat-iberia.github.io/rhel-containers/rhel-containers/02-deploy.html</loc>
-<lastmod>2024-09-16T14:27:13.109Z</lastmod>
+<loc>https://redhat-iberia.github.io/rhel-containers/rhel-containers/03-automatic-rollbacks.html</loc>
+<lastmod>2024-10-01T14:24:57.753Z</lastmod>
 </url>
 <url>
 <loc>https://redhat-iberia.github.io/rhel-containers/rhel-containers/index.html</loc>
-<lastmod>2024-09-16T14:27:13.109Z</lastmod>
+<lastmod>2024-10-01T14:24:57.753Z</lastmod>
 </url>
 </urlset>

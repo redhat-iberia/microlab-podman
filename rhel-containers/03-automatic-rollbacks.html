@@ -3,9 +3,9 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Despliegue y gestión de contenedores en RHEL :: Despliegue y gestión de contenedores en RHEL</title>
-    <link rel="canonical" href="https://redhat-iberia.github.io/rhel-containers/rhel-containers/index.html">
-    <link rel="next" href="01-escenario.html">
+    <title>Rollbacks automáticos :: Despliegue y gestión de contenedores en RHEL</title>
+    <link rel="canonical" href="https://redhat-iberia.github.io/rhel-containers/rhel-containers/03-automatic-rollbacks.html">
+    <link rel="prev" href="02-podman-auto-update.html">
     <meta name="generator" content="Antora 3.0.0">
     <link rel="stylesheet" href="../_/css/site.css">
   </head>
@@ -107,27 +107,27 @@
   </li>
 </ul>
   </li>
-  <li class="nav-item" data-depth="1">
+  <li class="nav-item is-current-page" data-depth="1">
     <button class="nav-item-toggle"></button>
     <a class="nav-link" href="03-automatic-rollbacks.html">3. Rollbacks automáticos</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="03-automatic-rollbacks.html#rollback_funcionamiento">Funcionamiento</a>
+    <a class="nav-link" href="#rollback_funcionamiento">Funcionamiento</a>
   </li>
   <li class="nav-item" data-depth="2">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="03-automatic-rollbacks.html#rollbak_tetris">Rollback del Tetris</a>
+    <a class="nav-link" href="#rollbak_tetris">Rollback del Tetris</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="03-automatic-rollbacks.html#rollbak_automatico">Rollback automático</a>
+    <a class="nav-link" href="#rollbak_automatico">Rollback automático</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="03-automatic-rollbacks.html#rollbak_manual">Rollback manual</a>
+    <a class="nav-link" href="#rollbak_manual">Rollback manual</a>
   </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="03-automatic-rollbacks.html#rollbak_resumen">Resumen</a>
+    <a class="nav-link" href="#rollbak_resumen">Resumen</a>
   </li>
 </ul>
   </li>
@@ -142,113 +142,128 @@
 <main class="article">
 <div class="toolbar" role="navigation">
 <button class="nav-toggle"></button>
-  <a href="index.html" class="home-link is-current"></a>
+  <a href="index.html" class="home-link"></a>
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="index.html">Despliegue y gestión de contenedores en RHEL</a></li>
+    <li><a href="03-automatic-rollbacks.html">3. Rollbacks automáticos</a></li>
   </ul>
 </nav>
-  <div class="edit-this-page"><a href="https://github.com/redhat-iberia/microlab-podman/edit/master/documentation/modules/ROOT/pages/index.adoc">Edit this Page</a></div>
+  <div class="edit-this-page"><a href="https://github.com/redhat-iberia/microlab-podman/edit/master/documentation/modules/ROOT/pages/03-automatic-rollbacks.adoc">Edit this Page</a></div>
   </div>
   <div class="content">
 <article class="doc">
-<h1 class="page">Despliegue y gestión de contenedores en RHEL</h1>
+<h1 class="page">Rollbacks automáticos</h1>
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>En este microlaboratorio, podraś explorar el despliegue y la gestión de contenedores en RHEL 9 usando Podman en la línea de comandos (CLI); y de manera gráfica, con Podman Desktop.</p>
+<p>El equipo de desarrollo a veces crea una versión que no funciona correctamente. Para evitar tiempos de caída, donde hemos parado el contenedor de la versión anterior, y el nuevo no arranca, o se reinicia, porque la imagen no está bien, haremos uso de la funcionalidad de <code>rollback</code> de podman.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Al igual que con <code>podman auto-update</code>, usaremos una cuenta de usuario para hacer el Build de la imagen del Tetris, y otra cuenta de usuario para desplegar el contenedor con podman.
+</td>
+</tr>
+</table>
 </div>
 </div>
 </div>
-<div class="sect1 tiles browse">
-<h2>Contenido</h2>
+<div class="sect1">
+<h2 id="rollback_funcionamiento"><a class="anchor" href="#rollback_funcionamiento"></a>Funcionamiento</h2>
 <div class="sectionbody">
-<div class="ulist">
-<div class="title"><a href="01-escenario.html" class="xref page">Escenario</a></div>
-<ul>
-<li>
-<p><a href="01-escenario.html#app" class="xref page">Tetris</a></p>
-</li>
-<li>
-<p><a href="01-escenario.html#ulab" class="xref page">Microlaboratio</a></p>
-</li>
-</ul>
+<div class="paragraph">
+<p>Cuando <code>podman auto-update</code> actualiza una imagen, detecta si el nuevo contenedor ha arrancado bien o no. Si no ha arrancado correctamente con la nueva imagen, <code>podman</code> automáticamente arranca el contenedor con la imagen antigua.</p>
 </div>
-<div class="ulist tile">
-<div class="title"><a href="02-podman-auto-update.html" class="xref page">Podman auto-update</a></div>
-<ul>
-<li>
-<p><a href="02-podman-auto-update.html#funcionamiento" class="xref page">Funcionamiento</a></p>
-<div class="ulist">
-<ul>
-<li>
-<p><a href="02-podman-auto-update.html#systemd" class="xref page">Systemd Unit y Timer</a></p>
-</li>
-</ul>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+En la sección anterior, se explicó que se había creado una <code>service unit</code> mediante el comando <code>podman generate systemd --new tetris</code>. <code>Podman auto-update</code> detecta si hay una nueva imagen, y reinicia la <code>service unit</code>. Systemd considera el servicio como <code>started</code> una vez que el contenedor ha mandado el mensaje de <code>ready</code>. Si no lo hace, <code>podman</code> revierte la imagen a la última versión que funcionaba, y reinicia de nueva la <code>service unit</code> para ejecutar el contenedor con la última imagen que funcionaba.
+</td>
+</tr>
+</table>
 </div>
-</li>
-<li>
-<p><a href="02-podman-auto-update.html#dtetris" class="xref page">Tetris</a></p>
-<div class="ulist">
-<ul>
-<li>
-<p><a href="02-podman-auto-update.html#despliegue" class="xref page">Despliegue</a></p>
-<div class="ulist">
-<ul>
-<li>
-<p><a href="02-podman-auto-update.html#build" class="xref page">Build</a></p>
-</li>
-<li>
-<p><a href="02-podman-auto-update.html#tag" class="xref page">Tag</a></p>
-</li>
-<li>
-<p><a href="02-podman-auto-update.html#run" class="xref page">Run</a></p>
-</li>
-<li>
-<p><a href="02-podman-auto-update.html#test" class="xref page">Test</a></p>
-</li>
-</ul>
+<div class="imageblock">
+<div class="content">
+<img src="_images/podman-autoupdate-rollback.png" alt="podman autoupdate rollback">
 </div>
-</li>
-<li>
-<p><a href="02-podman-auto-update.html#actualizacion" class="xref page">Actualización</a></p>
-</li>
-</ul>
 </div>
-</li>
-<li>
-<p><a href="02-podman-auto-update.html#resumen" class="xref page">Resumen</a></p>
-</li>
-</ul>
 </div>
-<div class="ulist tile">
-<div class="title"><a href="03-automatic-rollbacks.html" class="xref page">Rollbacks automáticos</a></div>
-<ul>
-<li>
-<p><a href="03-automatic-rollbacks.html#rollback_funcionamiento" class="xref page">Funcionamiento</a></p>
-</li>
-<li>
-<p><a href="03-automatic-rollbacks.html#rollbak_tetris" class="xref page">Rollback del Tetris</a></p>
+</div>
+<div class="sect1">
+<h2 id="rollbak_tetris"><a class="anchor" href="#rollbak_tetris"></a>Rollback del Tetris</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Los desarrolladores han liberado una nueva release del Tetris, pero se ha colado un bug que hace que el contenedor no pueda arrancar bien.</p>
+</div>
+<div class="paragraph">
+<p>Construiremos la nueva imagen siguiendo los pasos de la sección anterior:</p>
+</div>
 <div class="ulist">
 <ul>
 <li>
-<p><a href="03-automatic-rollbacks.html#rollbak_automatico" class="xref page">Rollback automático</a></p>
+<p>Construimos la imagen usando la carpeta <code>v3.0</code> y poniendole el tag <code>localhost/tetris:3.0</code></p>
 </li>
 <li>
-<p><a href="03-automatic-rollbacks.html#rollbak_manual" class="xref page">Rollback manual</a></p>
+<p>Añadimos el tag <code>localhost/tetris:latest</code></p>
+</li>
+<li>
+<p>Subimos la imagen al registry con <code>podman push</code></p>
 </li>
 </ul>
 </div>
-</li>
-<li>
-<p><a href="03-automatic-rollbacks.html#rollbak_resumen" class="xref page">Resumen</a></p>
-</li>
-</ul>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">podman tag {registry}/tetris:3.0 {registry}/tetris:latest
+podman push {registry}/tetris:3.0
+podman push {registry}/tetris:latest</code></pre>
+</div>
+</div>
+<div class="sect2">
+<h3 id="rollbak_automatico"><a class="anchor" href="#rollbak_automatico"></a>Rollback automático</h3>
+<div class="paragraph">
+<p><code>Podman auto-update</code> se encargará de ver que la imagen <code>localhost/tetris:latest</code> se ha actulizado, y desplegará la nueva aplicación. Sin embargo, la nueva imagen fallará, por lo que se hará un rollback a la versión anterior.</p>
+</div>
+<div class="paragraph">
+<p>Podemos ver las imagenes con <code>podman images</code>:</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+El timer para lanzar <code>podman auto-update</code> es cada 1 minuto. Si no quieres esperar, puedes ejecutar directamente en la terminal <code>podman auto-update</code>.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="rollbak_manual"><a class="anchor" href="#rollbak_manual"></a>Rollback manual</h3>
+
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="resumen"><a class="anchor" href="#resumen"></a>Resumen</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Hemos visto cómo <code>podman auto-update</code> busca si hay una versión disponible en el registry. En el caso de que haya una nueva versión, hará un pull de la imagen y actualizará el contenedor usando la nueva imagen. Si esta nueva imagen falla, se hará un rollback automático y se ejecutará la última versión que funcionaba correctamente.</p>
 </div>
 </div>
 </div>
 <nav class="pagination">
-  <span class="next"><a href="01-escenario.html">1. Escenario</a></span>
+  <span class="prev"><a href="02-podman-auto-update.html">2. Podman auto-update</a></span>
 </nav>
 </article>
 <aside class="toc sidebar" data-title="Contents" data-levels="2">

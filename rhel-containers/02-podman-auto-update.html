@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Podman auto-update :: Despliegue y gestión de contenedores en RHEL</title>
+    <link rel="canonical" href="https://redhat-iberia.github.io/rhel-containers/rhel-containers/02-podman-auto-update.html">
+    <link rel="prev" href="01-escenario.html">
+    <link rel="next" href="03-automatic-rollbacks.html">
+    <meta name="generator" content="Antora 3.0.0">
+    <link rel="stylesheet" href="../_/css/site.css">
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://developers.redhat.com" target="_blank"><img src="../_/img/RHDLogo.svg" height="40px" alt="Red Hat Developer Program"></a>
+      <a class="navbar-item" style="font-size: 24px; color: white" href="https://redhat-iberia.github.io/rhel-containers">Despliegue y gestión de contenedores en RHEL</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="https://developers.redhat.com/ebooks/" target="_blank">Books</a>
+        <a class="navbar-item" href="https://developers.redhat.com/cheatsheets/" target="_blank">Cheat Sheets</a>
+        <a class="navbar-item" href="https://developers.redhat.com/events/" target="_blank">Upcoming Events</a>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">More Tutorials</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="https://redhat-developer-demos.github.io/kubernetes-tutorial/" target="_blank">Kubernetes</a>
+            <a class="navbar-item" href="https://redhat-developer-demos.github.io/istio-tutorial/" target="_blank">Istio</a>
+            <a class="navbar-item" href="https://redhat-developer-demos.github.io/quarkus-tutorial/" target="_blank">Quarkus</a>
+            <a class="navbar-item" href="https://redhat-developer-demos.github.io/knative-tutorial/" target="_blank">Knative</a>
+            <a class="navbar-item" href="https://redhat-developer-demos.github.io/tekton-tutorial/" target="_blank">Tekton</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="rhel-containers" data-version="master">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="index.html"></a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="01-escenario.html">1. Escenario</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="01-escenario.html#app">Tetris</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="01-escenario.html#ulab">Microlaboratio</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item is-current-page" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="02-podman-auto-update.html">2. Podman auto-update</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="#funcionamiento">Funcionamiento</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="#systemd">Systemd Unit y Timer</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="#dtetris">Tetris</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="#despliegue">Despliegue</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="#build">Build</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="#tag">Tag</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="#run">Run</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="#test">Test</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="#actualizacion">Actualización</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#resumen">Resumen</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="03-automatic-rollbacks.html">3. Rollbacks automáticos</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="03-automatic-rollbacks.html#rollback_funcionamiento">Funcionamiento</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="03-automatic-rollbacks.html#rollbak_tetris">Rollback del Tetris</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="03-automatic-rollbacks.html#rollbak_automatico">Rollback automático</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="03-automatic-rollbacks.html#rollbak_manual">Rollback manual</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="03-automatic-rollbacks.html#rollbak_resumen">Resumen</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="index.html">Despliegue y gestión de contenedores en RHEL</a></li>
+    <li><a href="02-podman-auto-update.html">2. Podman auto-update</a></li>
+  </ul>
+</nav>
+  <div class="edit-this-page"><a href="https://github.com/redhat-iberia/microlab-podman/edit/master/documentation/modules/ROOT/pages/02-podman-auto-update.adoc">Edit this Page</a></div>
+  </div>
+  <div class="content">
+<article class="doc">
+<h1 class="page">Podman auto-update</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>El equipo de desarrollo, trabajando de una forma Agile, va a desarrollar en cada Sprint una nueva versión del Tetris con mejoras y bug fixes. El equipo de QA, cuando recibe una nueva versión, tiene que construir la nueva imagen y probarla. Para ello, haremos uso de la funcionalidad <code>auto-update</code> de podman.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Para ver mejor la funcionalidad de <code>podman auto-update</code>, usaremos una cuenta de usuario para hacer el Build de la imagen del Tetris, y otra cuenta de usuario para desplegar el contenedor con podman.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="funcionamiento"><a class="anchor" href="#funcionamiento"></a>Funcionamiento</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Con <code>podman auto-update</code>, si hay disponible una nueva versión de la imagen en el registry, podman va a detectar la nueva versión, y actualizará el contenedor desplegando la nueva  imagen automáticamente.</p>
+</div>
+<div class="paragraph">
+<p><code>Podman auto-update</code> filtra los contenedores que tengan la etiqueta <code>io.containers.autoupdate</code>, y busca si hay nuevas versiones de las imágenes de los contenedores.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Para facilitar el laboratorio, se ha creado una <code>service unit</code> mediante el comando <code>podman generate systemd --new tetris</code>. Esta <code>service unit</code> crea el contenedor <code>tetris</code> con la imagen <code>localhost/tetris:latest</code> y la label <code>io.containers.autoupdate=registry</code>. La funcionalidad <code>podman auto-update</code> requiere la generación de la <code>service unit</code>. Para más información, puedes preguntar a nuestro Staff.
+</td>
+</tr>
+</table>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/podman_autoupdate.png" alt="podman autoupdate">
+</div>
+</div>
+<div class="sect2">
+<h3 id="systemd"><a class="anchor" href="#systemd"></a>Systemd Unit y Timer</h3>
+<div class="paragraph">
+<p>Hay 2 formas de lanzar el <code>auto-update</code>:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Manual</strong>: mediante el comando <code>podman auto-update</code></p>
+</li>
+<li>
+<p><strong>Automática</strong>: mediante el servicio <code>podman-auto-update.service</code>, que es lanzado por el timer <code>podman-auto-update.timer</code>.</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+El timer de systemd es el programador de unidades de systemd. Por defecto,  <code>podman-auto-update.timer</code> invoca el servicio <code>podman-auto-update.service</code> una vez al día a medianoche. En este laboratio se ha configurado para que lance el servicio cada minuto.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="dtetris"><a class="anchor" href="#dtetris"></a>Tetris</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="despliege"><a class="anchor" href="#despliege"></a>Despliegue</h3>
+<div class="paragraph">
+<p>Vamos a construir y desplegar la imagen de Tetris <code>v1.0</code> usando <code>Podman Desktop</code>. Para ello,  abriremos la aplicación <code>Podman Desktop</code>:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Haz click en <code>Actividades</code></p>
+</li>
+<li>
+<p>En el cuadro de búsqueda, escribe <code>Podman Desktop</code></p>
+</li>
+<li>
+<p>Haz click en el icono de <code>Podman Desktop</code></p>
+</li>
+</ol>
+</div>
+<div class="sect3">
+<h4 id="build"><a class="anchor" href="#build"></a>Build</h4>
+<div class="paragraph">
+<p>Cuando se inicie <code>Podman Desktop</code>, haz click en <code>Go to Podman Desktop</code>. En el menú de la izquierda, selecciona el apartado de <code>Images</code>. En la parte de la derecha, haz click en <code>Build</code>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/podman_desktop_images.png" alt="podman desktop images">
+</div>
+</div>
+<div class="paragraph">
+<p>En el formulario desplegado, seleccionamos el <code>Containerfile</code> haciendo click en la carpeta que sale en la línea de <code>Containerfile path</code>. En el navegador de archivos, seleccionamos a la izquierda <code>Carpeta Personal</code>, y a la derecha <code>tetris</code> &#8594; <code>v1.0</code>, y seleccionamos el archivo <code>Containerfile</code>. Como nombre de imagen, en el campo <code>Image Name</code>, pondremos <code>localhost/tetris:1.0</code>.</p>
+</div>
+<div class="paragraph">
+<p>Finalmente construimos la imagen haciendo click en <code>Build</code>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/podman_desktop_container_build.png" alt="podman desktop container build">
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="tag"><a class="anchor" href="#tag"></a>Tag</h4>
+<div class="paragraph">
+<p>Cuando construyamos una nueva imagen, le añadiremos la tag de <code>latest</code>. Para desplegar la imagen, abrimos la Terminal, y ejecutaremos el comando <code>podman tag localhost/tetris:1.0 localhost/tetris:latest</code>.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="push"><a class="anchor" href="#push"></a>Push</h4>
+<div class="paragraph">
+<p>Para subir la imagen al registry, en la Terminal, ejecutaremos el comando <code>podman push</code>. Subiremos tanto la versión <code>1.0</code> como la <code>latest</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">podman push {registry}/tetris:1.0
+podman push {registry}/tetris:latest</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Ahora que tenemos la imagen subida al registry, vamos a desplegar la imagen en un contenedor.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="run"><a class="anchor" href="#run"></a>Run</h4>
+<div class="paragraph">
+<p>Para desplegar la imagen en un contenedor, lo haremos con el usuario <code>qa</code>. Abrimos la Terminal, ejecutamos <code>sudo su - qa. Podemos ver que actualmente el usuario `qa</code> no tiene ninguna imagen ejecutando <code>podman images</code>. Ejecutamos la aplicación del tetris usando el comando <code>systemctl --user start tetris</code>. Ejecutando <code>podman ps</code>, podrás ver el contenedor del Tetris en ejecución.</p>
+</div>
+<div class="paragraph">
+<p>Vuelve a ejecutar <code>podman images</code>, y ahora aparecerá la imagen <code>localhost/tetris:latest</code>. Anota el <code>IMAGE ID</code>, ya que posteriormente desplegaremos una nueva versión.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="test"><a class="anchor" href="#test"></a>Test</h4>
+<div class="paragraph">
+<p>Y ahora la parte más importante de nuestro trabajo como parte del equipo de QA: ¡testear la aplicación! Para abrir la aplicación, abrimos Firefox, y vamos a <a href="http://localhost:9000" class="bare">http://localhost:9000</a>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/podman_desktop_tetris_app.png" alt="podman desktop tetris app">
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="actualizacion"><a class="anchor" href="#actualizacion"></a>Actualización</h3>
+<div class="paragraph">
+<p>Los desarrolladores han liberado una nueva release del Tetris, y nos han compartido el código. Construiremos la nueva imagen, pero no ejecutaremos un nuevo contenedor con la nueva imagen, sino que <code>podman auto-update</code> lo hará por nosotros.</p>
+</div>
+<div class="paragraph">
+<p>Repetiremos los pasos realizados para el depliege del Tetris, pero usando en el Build la carpeta <code>v2.0</code>. Pondremos también el tag de <code>latest</code>, y haremos un push de la imagen.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">podman tag {registry}/tetris:2.0 {registry}/tetris:latest
+podman push {registry}/tetris:2.0
+podman push {registry}/tetris:latest</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>Podman auto-update</code> se encargará de ver que la imagen <code>localhost/tetris:latest</code> se ha actulizado, y desplegará la nueva aplicación.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+El timer para lanzar <code>podman auto-update</code> es cada 1 minuto. Si no quieres esperar, puedes ejecutar directamente en la terminal <code>podman auto-update</code>.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Actualizaremos el navegador (F5), y si la aplicación se ha actualizado, veremos la nueva versión del Tetris. En la Terminal que tenemos abierta con el usuario <code>qa</code>, podemos ver también que la imagen ha cambiado haciendo un <code>podman images</code> y comparando el <code>IMAGE ID</code> con el anterior.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/podman_desktop_tetris_app_v2.png" alt="podman desktop tetris app v2">
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="resumen"><a class="anchor" href="#resumen"></a>Resumen</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Hemos visto cómo <code>podman auto-update</code> busca, para las imágenes que nosotros queramos que estén en ejecución, si hay una versión disponible en el registry. En el caso de que haya una nueva versión, hará un pull de la imagen y actualizará el contenedor usando la nueva imagen.</p>
+</div>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="01-escenario.html">1. Escenario</a></span>
+  <span class="next"><a href="03-automatic-rollbacks.html">3. Rollbacks automáticos</a></span>
+</nav>
+</article>
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <a class="rhd-logo" href="https://developers.redhat.com" target="_blank"></div>
+</footer>
+<script src="../_/js/vendor/clipboard.js"></script>
+<script src="../_/js/site.js"></script>
+<script async src="../_/js/vendor/highlight.js"></script>
+  </body>
+</html>
