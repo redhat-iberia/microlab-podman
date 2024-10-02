@@ -2,18 +2,18 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
 <loc>https://redhat-iberia.github.io/rhel-containers/rhel-containers/01-escenario.html</loc>
-<lastmod>2024-10-01T14:24:57.753Z</lastmod>
+<lastmod>2024-10-02T18:36:59.396Z</lastmod>
 </url>
 <url>
 <loc>https://redhat-iberia.github.io/rhel-containers/rhel-containers/02-podman-auto-update.html</loc>
-<lastmod>2024-10-01T14:24:57.753Z</lastmod>
+<lastmod>2024-10-02T18:36:59.396Z</lastmod>
 </url>
 <url>
 <loc>https://redhat-iberia.github.io/rhel-containers/rhel-containers/03-automatic-rollbacks.html</loc>
-<lastmod>2024-10-01T14:24:57.753Z</lastmod>
+<lastmod>2024-10-02T18:36:59.396Z</lastmod>
 </url>
 <url>
 <loc>https://redhat-iberia.github.io/rhel-containers/rhel-containers/index.html</loc>
-<lastmod>2024-10-01T14:24:57.753Z</lastmod>
+<lastmod>2024-10-02T18:36:59.396Z</lastmod>
 </url>
 </urlset>
