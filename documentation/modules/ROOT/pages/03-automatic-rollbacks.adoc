@@ -28,7 +28,7 @@ Construiremos la nueva imagen siguiendo los pasos de la sección anterior:
 * Añadimos el tag `{registry}/tetris:latest`
 * Subimos la imagen al registry con `podman push`
 
-[source,bash]
+[subs=attributes+]
 ----
 podman tag {registry}/tetris:3.0 {registry}/tetris:latest
 podman push {registry}/tetris:3.0

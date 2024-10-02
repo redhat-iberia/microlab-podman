@@ -15,7 +15,11 @@ Con `podman auto-update`, si hay disponible una nueva versión de la imagen en e
 
 `Podman auto-update` filtra los contenedores que tengan la etiqueta `io.containers.autoupdate`, y busca si hay nuevas versiones de las imágenes de los contenedores.
 
-NOTE: Para facilitar el laboratorio, se ha creado una `service unit` mediante el comando `podman generate systemd --new tetris`. Esta `service unit` crea el contenedor `tetris` con la imagen `{registry}/tetris:latest` y la label `io.containers.autoupdate=registry`. La funcionalidad `podman auto-update` requiere la generación de la `service unit`. Para más información, puedes preguntar a nuestro Staff.
+NOTE: `Podman auto-update` requiere la generación de `service units`. Para facilitar el laboratorio, se ha creado la `service unit` `tetris` mediante el comando `podman generate systemd --new tetris`, que crea el contenedor `tetris` con la imagen `{registry}/tetris:latest` y la label `io.containers.autoupdate=registry`.
+
+
+NOTE: Para más información sobre la `service unit` `tetris`, **puedes preguntar a nuestro Staff**.
+
 
 image::podman_autoupdate.png[]
 
@@ -64,7 +68,7 @@ Cuando construyamos una nueva imagen, le añadiremos la tag de `latest`. Para de
 
 Para subir la imagen al registry, en la Terminal, ejecutaremos el comando `podman push`. Subiremos tanto la versión `1.0` como la `latest`:
 
-[source,bash]
+[subs=attributes+]
 ----
 podman push {registry}/tetris:1.0
 podman push {registry}/tetris:latest
@@ -75,7 +79,14 @@ Ahora que tenemos la imagen subida al registry, vamos a desplegar la imagen en u
 [#run]
 ==== Run
 
-Para desplegar la imagen en un contenedor, lo haremos con el usuario `{qa-user}`. Abrimos la Terminal, ejecutamos `sudo su - {qa-user}. Podemos ver que actualmente el usuario `{qa-user}` no tiene ninguna imagen ejecutando `podman images`. Ejecutamos la aplicación del tetris usando el comando `systemctl --user start tetris`. Ejecutando `podman ps`, podrás ver el contenedor del Tetris en ejecución.
+Para desplegar la imagen en un contenedor, lo haremos con el usuario `{qa-user}`. Abrimos la Terminal, ejecutamos `sudo su - {qa-user}`. Podemos ver que actualmente el usuario `{qa-user}` no tiene ninguna imagen ejecutando `podman images`. Podemos arrancamos el contenedor con la imagen del tetris con `podman run`, o directamente iniciando la `systemd unit` tetris:
+
+[source,bash]
+----
+systemctl --user start tetris 
+----
+
+Ejecutando `podman ps`, podrás ver el contenedor del Tetris en ejecución.
 
 Vuelve a ejecutar `podman images`, y ahora aparecerá la imagen `{registry}/tetris:latest`. Anota el `IMAGE ID`, ya que posteriormente desplegaremos una nueva versión. 
 
@@ -93,7 +104,7 @@ Los desarrolladores han liberado una nueva release del Tetris, y nos han compart
 
 Repetiremos los pasos realizados para el depliege del Tetris, pero usando en el Build la carpeta `v2.0`. Pondremos también el tag de `latest`, y haremos un push de la imagen.
 
-[source,bash]
+[subs=attributes+]
 ----
 podman tag {registry}/tetris:2.0 {registry}/tetris:latest
 podman push {registry}/tetris:2.0
