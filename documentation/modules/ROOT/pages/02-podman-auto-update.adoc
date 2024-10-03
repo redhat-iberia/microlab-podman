@@ -1,4 +1,4 @@
-:registry: localhost
+:registry: registry.lab.example.com:5000
 :qa-user: qa
 
 = Podman auto-update
@@ -113,7 +113,15 @@ podman push {registry}/tetris:latest
 
 `Podman auto-update` se encargará de ver que la imagen `{registry}/tetris:latest` se ha actulizado, y desplegará la nueva aplicación.
 
-NOTE: El timer para lanzar `podman auto-update` es cada 1 minuto. Si no quieres esperar, puedes ejecutar directamente en la terminal `podman auto-update`.
+Con el usuario `qa` (`sudo su - qa`), puedes ver con el comando `podman images` que la nueva imagen todavía no se ha descargado. Y con el comando `podman auto-update --dry-run`, puedes ver que hay una versión, ya que la columna `UPDATED` muestra `pending`, que significa que hay una actualización disponible en el registry.
+
+==== Timer
+
+Se ha creado un `timer` para lanzar `podman auto-update` cada 1 minuto, pero no está activo. Para activar el `timer`, ejecuta el comando `systemctl --user start podman-auto-start.timer`. 
+
+NOTE: Si quieres lanzar `podman auto-update` manualmente, puedes ejecutarlo directamente en la terminal con el comando `podman auto-update`.
+
+==== Test versión 2
 
 Actualizaremos el navegador (F5), y si la aplicación se ha actualizado, veremos la nueva versión del Tetris. En la Terminal que tenemos abierta con el usuario `{qa-user}`, podemos ver también que la imagen ha cambiado haciendo un `podman images` y comparando el `IMAGE ID` con el anterior. 
 
