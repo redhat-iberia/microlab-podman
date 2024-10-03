@@ -210,10 +210,10 @@ En la sección anterior, se explicó que se había creado una <code>service unit
 <div class="ulist">
 <ul>
 <li>
-<p>Construimos la imagen usando la carpeta <code>v3.0</code> y poniendole el tag <code>localhost/tetris:3.0</code></p>
+<p>Construimos la imagen usando la carpeta <code>v3.0</code> y poniendole el tag <code>registry.lab.example.com:5000/tetris:3.0</code></p>
 </li>
 <li>
-<p>Añadimos el tag <code>localhost/tetris:latest</code></p>
+<p>Añadimos el tag <code>registry.lab.example.com:5000/tetris:latest</code></p>
 </li>
 <li>
 <p>Subimos la imagen al registry con <code>podman push</code></p>
@@ -222,15 +222,15 @@ En la sección anterior, se explicó que se había creado una <code>service unit
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>podman tag localhost/tetris:3.0 localhost/tetris:latest
-podman push localhost/tetris:3.0
-podman push localhost/tetris:latest</pre>
+<pre>podman tag registry.lab.example.com:5000/tetris:3.0 registry.lab.example.com:5000/tetris:latest
+podman push registry.lab.example.com:5000/tetris:3.0
+podman push registry.lab.example.com:5000/tetris:latest</pre>
 </div>
 </div>
 <div class="sect2">
 <h3 id="rollbak_automatico"><a class="anchor" href="#rollbak_automatico"></a>Rollback automático</h3>
 <div class="paragraph">
-<p><code>Podman auto-update</code> se encargará de ver que la imagen <code>localhost/tetris:latest</code> se ha actulizado, y desplegará la nueva aplicación. Sin embargo, la nueva imagen fallará, por lo que se hará un rollback a la versión anterior.</p>
+<p><code>Podman auto-update</code> se encargará de ver que la imagen <code>registry.lab.example.com:5000/tetris:latest</code> se ha actulizado, y desplegará la nueva aplicación. Sin embargo, la nueva imagen fallará, por lo que se hará un rollback a la versión anterior.</p>
 </div>
 <div class="paragraph">
 <p>Podemos ver las imagenes con <code>podman images</code>:</p>
