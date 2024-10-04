@@ -1,4 +1,4 @@
-:registry: registry.lab.example.com:5000
+:registry: registry.lab.melmac.univ:5000
 :qa-user: qa
 
 = Podman auto-update

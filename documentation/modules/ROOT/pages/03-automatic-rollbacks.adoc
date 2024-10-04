@@ -1,4 +1,4 @@
-:registry: registry.lab.example.com:5000
+:registry: registry.lab.melmac.univ:5000
 :qa-user: qa
 
 = Rollbacks automáticos
@@ -46,6 +46,8 @@ NOTE: El timer para lanzar `podman auto-update` es cada 1 minuto. Si no quieres 
 
 [#rollbak_manual]
 === Rollback manual
+
+Podemos ejecutar `podman auto-update --dry-run` para comprobar que hay una nueva versión del tetris. Ejecutando `podman auto-update`, podman hará un pull de la nueva versión, pero como el contenedor no puede iniciarse correctamente, hará un rollback a la versión que estaba funcionado.    
 
 [#resumen]
 == Resumen
