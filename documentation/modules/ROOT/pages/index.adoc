@@ -2,6 +2,8 @@
 :page-layout: home
 :!sectids:
 
+image::connect.png[]
+
 En este microlaboratorio, podraś explorar el despliegue y la gestión de contenedores en RHEL 9 usando Podman en la línea de comandos (CLI); y de manera gráfica, con Podman Desktop.
 
 
