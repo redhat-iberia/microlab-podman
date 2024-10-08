@@ -1,7 +1,17 @@
-= Escenario
+= Despliegue y gestión de contenedores en RHEL
 include::_attributes.adoc[]
 
+[#descipcion]
+== Descripción
+
 Eres un miembro del equipo de QA de **Retrogaming S.A.**, una empresa de desarrollo de videojuegos _retros_, para lanzar un Tetris web. 
+
+La infraestructura que utilizarás para esta laboratorio es la siguiente:
+
+image::diagram.png[]
+
+* Un portátil con Red Hat Enterprise Linux 9.4 como workstation.
+* Una máquina virtual con Red Hat Enterprise Linux 9.4 y hostname **podman** que utilizarás para el laboratorio.
 
 [#app]
 == Tetris
