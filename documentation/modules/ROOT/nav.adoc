@@ -1,9 +1,9 @@
-* xref:01-introduccion.adoc[1. Escenario]
+* xref:01-introduccion.adoc[1. Introducción]
 ** xref:01-introduccion.adoc#descripcion[Descripcion]
 ** xref:01-introduccion.adoc#app[Tetris]
 ** xref:01-introduccion.adoc#ulab[Microlaboratio]
 
-* xref:02-caso-practico.adoc[2. Podman auto-update]
+* xref:02-caso-practico.adoc[2. Caso práctico]
 ** xref:02-caso-practico#funcionamiento[Funcionamiento]
 *** xref:02-caso-practico#systemd[Systemd Unit y Timer]
 ** xref:02-caso-practico#dtetris[Tetris]
