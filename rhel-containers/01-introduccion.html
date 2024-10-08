@@ -4,8 +4,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Despliegue y gestión de contenedores en RHEL :: Despliegue y gestión de contenedores en RHEL</title>
-    <link rel="canonical" href="https://redhat-iberia.github.io/rhel-containers/rhel-containers/index.html">
-    <link rel="next" href="01-introduccion.html">
+    <link rel="canonical" href="https://redhat-iberia.github.io/rhel-containers/rhel-containers/01-introduccion.html">
+    <link rel="prev" href="index.html">
+    <link rel="next" href="02-caso-practico.html">
     <meta name="generator" content="Antora 3.0.0">
     <link rel="stylesheet" href="../_/css/site.css">
   </head>
@@ -50,18 +51,18 @@
 <ul class="nav-list">
   <li class="nav-item" data-depth="0">
 <ul class="nav-list">
-  <li class="nav-item" data-depth="1">
+  <li class="nav-item is-current-page" data-depth="1">
     <button class="nav-item-toggle"></button>
     <a class="nav-link" href="01-introduccion.html">1. Escenario</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="01-introduccion.html#descripcion">Descripcion</a>
+    <a class="nav-link" href="#descripcion">Descripcion</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="01-introduccion.html#app">Tetris</a>
+    <a class="nav-link" href="#app">Tetris</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="01-introduccion.html#ulab">Microlaboratio</a>
+    <a class="nav-link" href="#ulab">Microlaboratio</a>
   </li>
 </ul>
   </li>
@@ -145,138 +146,80 @@
 <main class="article">
 <div class="toolbar" role="navigation">
 <button class="nav-toggle"></button>
-  <a href="index.html" class="home-link is-current"></a>
+  <a href="index.html" class="home-link"></a>
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="index.html">Despliegue y gestión de contenedores en RHEL</a></li>
+    <li><a href="01-introduccion.html">1. Escenario</a></li>
   </ul>
 </nav>
-  <div class="edit-this-page"><a href="https://github.com/redhat-iberia/microlab-podman/edit/master/documentation/modules/ROOT/pages/index.adoc">Edit this Page</a></div>
+  <div class="edit-this-page"><a href="https://github.com/redhat-iberia/microlab-podman/edit/master/documentation/modules/ROOT/pages/01-introduccion.adoc">Edit this Page</a></div>
   </div>
   <div class="content">
 <article class="doc">
 <h1 class="page">Despliegue y gestión de contenedores en RHEL</h1>
-<div id="preamble">
+<div class="sect1">
+<h2 id="descipcion"><a class="anchor" href="#descipcion"></a>Descripción</h2>
 <div class="sectionbody">
+<div class="paragraph">
+<p>Eres un miembro del equipo de QA de <strong>Retrogaming S.A.</strong>, una empresa de desarrollo de videojuegos <em>retros</em>, para lanzar un Tetris web.</p>
+</div>
+<div class="paragraph">
+<p>La infraestructura que utilizarás para esta laboratorio es la siguiente:</p>
+</div>
 <div class="imageblock">
 <div class="content">
-<img src="_images/connect.png" alt="connect">
+<img src="_images/diagram.png" alt="diagram">
 </div>
 </div>
-<div class="paragraph">
-<p>En este microlaboratorio, podraś explorar el despliegue y la gestión de contenedores en RHEL 9 usando Podman en la línea de comandos (CLI); y de manera gráfica, con Podman Desktop.</p>
-</div>
-<div class="paragraph">
-<p>En este workshop la parte práctica que tiene que realizar el alumno vendrá indicada de la siguiente forma:</p>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-<div class="paragraph">
-<p>Ejemplo práctico para que lo haga el alumno.</p>
-</div>
-</td>
-</tr>
-</table>
+<div class="ulist">
+<ul>
+<li>
+<p>Un portátil con Red Hat Enterprise Linux 9.4 como workstation.</p>
+</li>
+<li>
+<p>Una máquina virtual con Red Hat Enterprise Linux 9.4 y hostname <strong>podman</strong> que utilizarás para el laboratorio.</p>
+</li>
+</ul>
 </div>
 </div>
 </div>
-<div class="sect1 tiles browse">
-<h2>Contenido</h2>
+<div class="sect1">
+<h2 id="app"><a class="anchor" href="#app"></a>Tetris</h2>
 <div class="sectionbody">
-<div class="ulist">
-<div class="title"><a href="01-introduccion.html" class="xref page">Escenario</a></div>
-<ul>
-<li>
-<p><a href="01-introduccion.html#descripcion" class="xref page">Descripcion</a></p>
-</li>
-<li>
-<p><a href="01-introduccion.html#app" class="xref page">Tetris</a></p>
-</li>
-<li>
-<p><a href="01-introduccion.html#ulab" class="xref page">Microlaboratio</a></p>
-</li>
-</ul>
+<div class="paragraph">
+<p>La aplicación del videjuego está contenerizada en <code>HTML</code> y <code>Javascript</code>. Los desarrolladores comparten el código de la imágenes: el <code>Containerfile</code> junto con los archivos necesarios. Como era de esperar, tendrás varias versiones del Tetris, algunas de las cuales contengan errores y fallen.</p>
 </div>
-<div class="ulist tile">
-<div class="title"><a href="02-caso-practico.html" class="xref page">Podman auto-update</a></div>
-<ul>
-<li>
-<p><a href="02-caso-practico.html#funcionamiento" class="xref page">Funcionamiento</a></p>
-<div class="ulist">
-<ul>
-<li>
-<p><a href="02-caso-practico.html#systemd" class="xref page">Systemd Unit y Timer</a></p>
-</li>
-</ul>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">v1.0/
+├── app
+│   ├── index.html
+│   ├── stats.js
+│   └── texture.jpg
+├── Containerfile
+├── LICENSE
+└── README.md</code></pre>
 </div>
-</li>
-<li>
-<p><a href="02-caso-practico.html#dtetris" class="xref page">Tetris</a></p>
-<div class="ulist">
-<ul>
-<li>
-<p><a href="02-caso-practico.html#despliegue" class="xref page">Despliegue</a></p>
-<div class="ulist">
-<ul>
-<li>
-<p><a href="02-caso-practico.html#build" class="xref page">Build</a></p>
-</li>
-<li>
-<p><a href="02-caso-practico.html#tag" class="xref page">Tag</a></p>
-</li>
-<li>
-<p><a href="02-caso-practico.html#run" class="xref page">Run</a></p>
-</li>
-<li>
-<p><a href="02-caso-practico.html#test" class="xref page">Test</a></p>
-</li>
-</ul>
 </div>
-</li>
-<li>
-<p><a href="02-caso-practico.html#actualizacion" class="xref page">Actualización</a></p>
-</li>
-</ul>
+<div class="imageblock">
+<div class="content">
+<img src="_images/tetris.png" alt="tetris">
 </div>
-</li>
-<li>
-<p><a href="02-caso-practico.html#resumen" class="xref page">Resumen</a></p>
-</li>
-</ul>
 </div>
-<div class="ulist tile">
-<div class="title"><a href="03-automatic-rollbacks.html" class="xref page">Rollbacks automáticos</a></div>
-<ul>
-<li>
-<p><a href="03-automatic-rollbacks.html#rollback_funcionamiento" class="xref page">Funcionamiento</a></p>
-</li>
-<li>
-<p><a href="03-automatic-rollbacks.html#rollbak_tetris" class="xref page">Rollback del Tetris</a></p>
-<div class="ulist">
-<ul>
-<li>
-<p><a href="03-automatic-rollbacks.html#rollbak_automatico" class="xref page">Rollback automático</a></p>
-</li>
-<li>
-<p><a href="03-automatic-rollbacks.html#rollbak_manual" class="xref page">Rollback manual</a></p>
-</li>
-</ul>
 </div>
-</li>
-<li>
-<p><a href="03-automatic-rollbacks.html#rollbak_resumen" class="xref page">Resumen</a></p>
-</li>
-</ul>
+</div>
+<div class="sect1">
+<h2 id="ulab"><a class="anchor" href="#ulab"></a>Microlaboratorio</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Tu trabajo consiste en crear y deplegar los contenedores, y lo más importante y divertido: probar cada versión del Tetris. Para hacer más fácil tu trabajo, y que puedas centrarte en dar valor como QA probando videojuegos, harás uso de dos funcionalidades de Podman: <code>podman auto-update</code> y <code>rollbacks automáticos</code>.</p>
 </div>
 </div>
 </div>
 <nav class="pagination">
-  <span class="next"><a href="01-introduccion.html">1. Escenario</a></span>
+  <span class="prev"><a href="index.html">Despliegue y gestión de contenedores en RHEL</a></span>
+  <span class="next"><a href="02-caso-practico.html">2. Podman auto-update</a></span>
 </nav>
 </article>
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
