@@ -51,7 +51,7 @@ Para conectarnos a la máquina que utilizaremos en el laboratorio pincharemos en
 
 image::podman-vnc.png[]
 
-Vamos a construir y desplegar la imagen de Tetris `v1.0` usando `Podman Desktop`. Para ello,  abriremos la aplicación `Podman Desktop`: 
+Vamos a construir y desplegar la imagen de Tetris `v1` usando `Podman Desktop`. Para ello,  abriremos la aplicación `Podman Desktop`: 
 
 1. Haz click en `Actividades`
 2. En el cuadro de búsqueda, escribe `Podman Desktop`
@@ -66,7 +66,7 @@ image::podman_desktop_images.png[]
 
 En el formulario desplegado, seleccionamos el `Containerfile` haciendo click en la carpeta que sale en la línea de `Containerfile path`. 
 
-En el navegador de archivos, seleccionamos a la izquierda `Carpeta Personal`, y a la derecha `tetris` -> `v1.0`, y seleccionamos el archivo `Containerfile`. Como nombre de imagen, en el campo `Image Name`, pondremos `{registry}/tetris:1.0`.
+En el navegador de archivos, seleccionamos a la izquierda `Carpeta Personal`, y a la derecha `tetris` -> `v1`, y seleccionamos el archivo `Containerfile`. Como nombre de imagen, en el campo `Image Name`, pondremos `{registry}/tetris:v1`.
 
 image::podman_desktop_container_build.png[]
 
@@ -79,17 +79,17 @@ Cuando construyamos una nueva imagen, le añadiremos la tag de `latest`. Para de
 
 [TIP,subs=attributes+]
 =====
-`$ podman tag {registry}/tetris:1.0 {registry}/tetris:latest`
+`$ podman tag {registry}/tetris:v1 {registry}/tetris:latest`
 =====
 
 [#push]
 ==== Push
 
-Para subir la imagen al registry, en la Terminal, ejecutaremos el comando `podman push`. Subiremos tanto la versión `1.0` como la `latest`:
+Para subir la imagen al registry, en la Terminal, ejecutaremos el comando `podman push`. Subiremos tanto la versión `v1` como la `latest`:
 
 [TIP]
 =====
-`$ podman push {registry}/tetris:1.0` +
+`$ podman push {registry}/tetris:v1` +
 `$ podman push {registry}/tetris:latest`
 =====
 
@@ -121,12 +121,12 @@ image::podman_desktop_tetris_app.png[]
 
 Los desarrolladores han liberado una nueva release del Tetris, y nos han compartido el código. Construiremos la nueva imagen, pero no ejecutaremos un nuevo contenedor con la nueva imagen, sino que `podman auto-update` lo hará por nosotros.
 
-Repetiremos los pasos realizados para el depliege del Tetris, pero usando en el Build la carpeta `v2.0`. Pondremos también el tag de `latest`, y haremos un push de la imagen.
+Repetiremos los pasos realizados para el depliege del Tetris, pero usando en el Build la carpeta `v2`. Pondremos también el tag de `latest`, y haremos un push de la imagen.
 
 [TIP]
 =====
-`$ podman tag {registry}/tetris:2.0 {registry}/tetris:latest` +
-`$ podman push {registry}/tetris:2.0` +
+`$ podman tag {registry}/tetris:v2 {registry}/tetris:latest` +
+`$ podman push {registry}/tetris:v2` +
 `$ podman push {registry}/tetris:latest`
 =====
 

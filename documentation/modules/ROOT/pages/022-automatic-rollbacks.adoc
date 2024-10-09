@@ -31,7 +31,7 @@ Los desarrolladores han liberado una nueva release del Tetris, pero se ha colado
 
 Construiremos la nueva imagen siguiendo los pasos de la sección anterior:
 
-* Construimos la imagen usando la carpeta `v3.0` y poniendole el tag `{registry}/tetris:3.0`
+* Construimos la imagen usando la carpeta `v3` y poniendole el tag `{registry}/tetris:v3`
 * Añadimos el tag `{registry}/tetris:latest`
 * Subimos la imagen al registry con `podman push`
 
@@ -39,8 +39,8 @@ Para ello, ejecutaremos los siguientes comandos:
 
 [TIP]
 ====
-`$ podman tag {registry}/tetris:3.0 {registry}/tetris:latest` +
-`$ podman push {registry}/tetris:3.0` +
+`$ podman tag {registry}/tetris:v3 {registry}/tetris:latest` +
+`$ podman push {registry}/tetris:v3` +
 `$ podman push {registry}/tetris:latest`
 ====
 
