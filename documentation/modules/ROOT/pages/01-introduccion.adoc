@@ -13,6 +13,20 @@ image::diagram.png[]
 * Un portátil con Red Hat Enterprise Linux 9.4 como workstation.
 * Una máquina virtual con Red Hat Enterprise Linux 9.4 y hostname **podman** que utilizarás para el laboratorio.
 
+[IMPORTANT]
+=====
+Para el laboratorio utilizar usuario **student** y password **redhat** para acceder a la máquina **podman** utilizando el launcher disponible en la barra de herramientas.
+
+image::podman-vnc.png[]
+=====
+
+[IMPORTANT]
+=====
+Una vez que termines el laboratorio es MUY importante que cierres sesión para que se resetee el entorno y el siguiente usuario pueda utilizarlo.
+
+Muchas gracias!!!
+=====
+
 [#app]
 == Tetris
 
