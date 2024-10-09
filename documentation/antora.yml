@@ -1,4 +1,4 @@
-name: rhel-containers
+name: microlab-podman
 title: Despliegue y gestión de contenedores en RHEL
 version: master
 nav:
