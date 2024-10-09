@@ -3,8 +3,8 @@ runtime:
 
 site:
   title: Despliegue y gestión de contenedores en RHEL
-  url: https://redhat-iberia.github.io/rhel-containers
-  start_page: rhel-containers::index.adoc
+  url: https://redhat-iberia.github.io/microlab-podman
+  start_page: microlab-podman::index.adoc
 
 content:
   sources:
