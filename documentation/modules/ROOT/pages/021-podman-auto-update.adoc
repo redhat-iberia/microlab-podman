@@ -66,7 +66,7 @@ image::podman_desktop_images.png[]
 
 En el formulario desplegado, seleccionamos el `Containerfile` haciendo click en la carpeta que sale en la línea de `Containerfile path`. 
 
-En el navegador de archivos, seleccionamos a la izquierda `Carpeta Personal`, y a la derecha `tetris` -> `v1`, y seleccionamos el archivo `Containerfile`. Como nombre de imagen, en el campo `Image Name`, pondremos `{registry}/tetris:v1`.
+En el navegador de archivos, seleccionamos a la izquierda `Carpeta Personal`, y a la derecha `tetris` -> `v1.0`, y seleccionamos el archivo `Containerfile`. Como nombre de imagen, en el campo `Image Name`, pondremos `{registry}/tetris:v1`.
 
 image::podman_desktop_container_build.png[]
 
@@ -121,7 +121,7 @@ image::podman_desktop_tetris_app.png[]
 
 Los desarrolladores han liberado una nueva release del Tetris, y nos han compartido el código. Construiremos la nueva imagen, pero no ejecutaremos un nuevo contenedor con la nueva imagen, sino que `podman auto-update` lo hará por nosotros.
 
-Repetiremos los pasos realizados para el depliege del Tetris, pero usando en el Build la carpeta `v2`. Pondremos también el tag de `latest`, y haremos un push de la imagen.
+Repetiremos los pasos realizados para el depliege del Tetris, pero usando en el Build la carpeta `v2.0`. Pondremos también el tag de `latest`, y haremos un push de la imagen.
 
 [TIP]
 =====
