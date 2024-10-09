@@ -1,0 +1,62 @@
+:registry: registry.lab.melmac.univ:5000
+:qa-user: qa
+
+[#rollbacks]
+= Rollbacks automáticos
+include::_attributes.adoc[]
+
+El equipo de desarrollo a veces crea una versión que no funciona correctamente. Para evitar tiempos de caída, donde hemos parado el contenedor de la versión anterior, y el nuevo no arranca, o se reinicia, porque la imagen no está bien, haremos uso de la funcionalidad de `rollback` de podman.
+
+[IMPORTANT]
+====
+Al igual que con `podman auto-update`, usaremos la cuenta de usuario `Student` para hacer el Build de la imagen del Tetris, y la cuenta de usuario `QA` para desplegar el contenedor con podman.
+====
+
+[#rollback_funcionamiento]
+== Funcionamiento
+
+Cuando `podman auto-update` actualiza una imagen, detecta si el nuevo contenedor ha arrancado bien o no. Si no ha arrancado correctamente con la nueva imagen, `podman` automáticamente arranca el contenedor con la imagen antigua.
+
+[NOTE]
+====
+En la sección anterior, se explicó que se había creado una `service unit` mediante el comando `podman generate systemd --new tetris`. `Podman auto-update` detecta si hay una nueva imagen, y reinicia la `service unit`. Systemd considera el servicio como `started` una vez que el contenedor ha mandado el mensaje de `ready`. Si no lo hace, `podman` revierte la imagen a la última versión que funcionaba, y reinicia de nueva la `service unit` para ejecutar el contenedor con la última imagen que funcionaba.
+====
+
+image::podman-autoupdate-rollback.png[]
+
+[#rollback_tetris]
+== Rollback del Tetris
+
+Los desarrolladores han liberado una nueva release del Tetris, pero se ha colado un bug que hace que el contenedor no pueda arrancar bien.
+
+Construiremos la nueva imagen siguiendo los pasos de la sección anterior:
+
+* Construimos la imagen usando la carpeta `v3.0` y poniendole el tag `{registry}/tetris:3.0`
+* Añadimos el tag `{registry}/tetris:latest`
+* Subimos la imagen al registry con `podman push`
+
+Para ello, ejecutaremos los siguientes comandos:
+
+[TIP]
+====
+`$ podman tag {registry}/tetris:3.0 {registry}/tetris:latest` +
+`$ podman push {registry}/tetris:3.0` +
+`$ podman push {registry}/tetris:latest`
+====
+
+[#rollback_automatico]
+=== Rollback automático
+
+`Podman auto-update` se encargará de ver que la imagen `{registry}/tetris:latest` se ha actulizado, y desplegará la nueva aplicación. Sin embargo, la nueva imagen fallará, por lo que se hará un rollback a la versión anterior.
+
+Podemos ver las imagenes con `podman images`.
+
+[NOTE]
+====
+El timer para lanzar `podman auto-update` es cada 1 minuto. Si no quieres esperar, puedes ejecutar directamente en la terminal `podman auto-update`.
+====
+
+[#rollback_manual]
+=== Rollback manual
+
+Podemos ejecutar `podman auto-update --dry-run` para comprobar que hay una nueva versión del tetris. Ejecutando `podman auto-update`, podman hará un pull de la nueva versión, pero como el contenedor no puede iniciarse correctamente, hará un rollback a la versión que estaba funcionado.

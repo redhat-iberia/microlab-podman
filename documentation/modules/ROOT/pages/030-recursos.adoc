@@ -1,0 +1,5 @@
+= Recursos sobre Podman auto-update
+
+* https://www.redhat.com/sysadmin/podman-auto-updates-rollbacks[How to use auto-updates and rollbacks in Podman]
+* https://www.redhat.com/sysadmin/podman-features-3[5 cool features to automate Podman containers and pods]
+* https://docs.podman.io/en/latest/markdown/podman-auto-update.1.html[Podman auto-update - Documentation]

@@ -1,0 +1,149 @@
+:registry: registry.lab.melmac.univ:5000
+:qa-user: qa
+
+[#podman-auto-update]
+= Podman auto-update
+include::_attributes.adoc[]
+
+El equipo de desarrollo, trabajando de una forma Agile, va a desarrollar en cada Sprint una nueva versión del Tetris con mejoras y bug fixes. El equipo de QA, cuando recibe una nueva versión, tiene que construir la nueva imagen y probarla. Para ello, haremos uso de la funcionalidad `auto-update` de podman.
+
+[IMPORTANT]
+=====
+Para ver mejor la funcionalidad de `podman auto-update`, usaremos una cuenta de usuario para hacer el Build de la imagen del Tetris, y otra cuenta de usuario para desplegar el contenedor con podman.
+=====
+
+[#funcionamiento]
+== Funcionamiento de Podman auto-update
+
+Con `podman auto-update`, si hay disponible una nueva versión de la imagen en el registry, podman va a detectar la nueva versión, y actualizará el contenedor desplegando la nueva  imagen automáticamente.
+
+`Podman auto-update` filtra los contenedores que tengan la etiqueta `io.containers.autoupdate`, y busca si hay nuevas versiones de las imágenes de los contenedores.
+
+[NOTE] 
+=====
+`Podman auto-update` requiere la generación de `service units`. Para facilitar el laboratorio, se ha creado la `service unit` `tetris` mediante el comando `podman generate systemd --new tetris`, que crea el contenedor `tetris` con la imagen `{registry}/tetris:latest` y la label `io.containers.autoupdate=registry`.
+=====
+
+image::podman_autoupdate.png[]
+
+[IMPORTANT]
+=====
+Para más información sobre el funcionamiento de `podman auto-update`, o la `service unit` `tetris`, **puedes preguntar a nuestro Staff**.
+=====
+
+[#systemd]
+=== Systemd Unit y Timer
+
+Hay 2 formas de lanzar el `auto-update`: 
+
+* **Manual**: mediante el comando `podman auto-update`
+* **Automática**: mediante el servicio `podman-auto-update.service`, que es lanzado por el timer `podman-auto-update.timer`.
+
+NOTE: El timer de systemd es el programador de unidades de systemd. Por defecto,  `podman-auto-update.timer` invoca el servicio `podman-auto-update.service` una vez al día a medianoche. En este laboratio se ha configurado para que lance el servicio cada minuto.
+
+[#dtetris]
+== Tetris
+
+[#despliege]
+=== Despliegue
+
+Vamos a construir y desplegar la imagen de Tetris `v1.0` usando `Podman Desktop`. Para ello,  abriremos la aplicación `Podman Desktop`: 
+
+1. Haz click en `Actividades`
+2. En el cuadro de búsqueda, escribe `Podman Desktop`
+3. Haz click en el icono de `Podman Desktop`
+
+[#build]
+==== Build
+
+Cuando se inicie `Podman Desktop`, haz click en `Go to Podman Desktop`. En el menú de la izquierda, selecciona el apartado de `Images`. En la parte de la derecha, haz click en `Build`.
+
+image::podman_desktop_images.png[]
+
+En el formulario desplegado, seleccionamos el `Containerfile` haciendo click en la carpeta que sale en la línea de `Containerfile path`. 
+
+En el navegador de archivos, seleccionamos a la izquierda `Carpeta Personal`, y a la derecha `tetris` -> `v1.0`, y seleccionamos el archivo `Containerfile`. Como nombre de imagen, en el campo `Image Name`, pondremos `{registry}/tetris:1.0`.
+
+image::podman_desktop_container_build.png[]
+
+Finalmente construimos la imagen haciendo click en `Build`.
+
+[#tag]
+==== Tag
+
+Cuando construyamos una nueva imagen, le añadiremos la tag de `latest`. Para desplegar la imagen, abrimos la Terminal, y ejecutaremos el comando:
+
+[TIP,subs=attributes+]
+=====
+`$ podman tag {registry}/tetris:1.0 {registry}/tetris:latest`
+=====
+
+[#push]
+==== Push
+
+Para subir la imagen al registry, en la Terminal, ejecutaremos el comando `podman push`. Subiremos tanto la versión `1.0` como la `latest`:
+
+[TIP]
+=====
+`$ podman push {registry}/tetris:1.0` +
+`$ podman push {registry}/tetris:latest`
+=====
+
+Ahora que tenemos la imagen subida al registry, vamos a desplegar la imagen en un contenedor.
+
+[#run]
+==== Run
+
+Para desplegar la imagen en un contenedor, lo haremos con el usuario `{qa-user}`. Abrimos la Terminal, ejecutamos `sudo su - {qa-user}`. Podemos ver que actualmente el usuario `{qa-user}` no tiene ninguna imagen ejecutando `podman images`. Podemos arrancamos el contenedor con la imagen del tetris con `podman run`, o directamente iniciando la `systemd unit` tetris:
+
+[TIP]
+=====
+`$ systemctl --user start tetris`
+=====
+
+Ejecutando `podman ps`, podrás ver el contenedor del Tetris en ejecución.
+
+Vuelve a ejecutar `podman images`, y ahora aparecerá la imagen `{registry}/tetris:latest`. Anota el `IMAGE ID`, ya que posteriormente desplegaremos una nueva versión. 
+
+[#test]
+==== Test
+
+Y ahora la parte más importante de nuestro trabajo como parte del equipo de QA: ¡testear la aplicación! Para abrir la aplicación, abrimos Firefox, y vamos a http://localhost:9000.
+
+image::podman_desktop_tetris_app.png[]
+
+[#actualizacion]
+=== Actualización
+
+Los desarrolladores han liberado una nueva release del Tetris, y nos han compartido el código. Construiremos la nueva imagen, pero no ejecutaremos un nuevo contenedor con la nueva imagen, sino que `podman auto-update` lo hará por nosotros.
+
+Repetiremos los pasos realizados para el depliege del Tetris, pero usando en el Build la carpeta `v2.0`. Pondremos también el tag de `latest`, y haremos un push de la imagen.
+
+[TIP]
+=====
+`$ podman tag {registry}/tetris:2.0 {registry}/tetris:latest` +
+`$ podman push {registry}/tetris:2.0` +
+`$ podman push {registry}/tetris:latest`
+=====
+
+Con el usuario `qa` (`sudo su - qa`), puedes ver con el comando `podman images` que la nueva imagen todavía no se ha descargado. Y con el comando `podman auto-update --dry-run`, puedes ver que hay una versión, ya que la columna `UPDATED` muestra `pending`, que significa que hay una actualización disponible en el registry.
+
+[IMPORTANT]
+====
+`Podman auto-update` se encargará de ver que la imagen `{registry}/tetris:latest` se ha actulizado, y desplegará la nueva aplicación.
+====
+
+==== Timer
+
+Se ha creado un `timer` para lanzar `podman auto-update` cada 1 minuto, pero no está activo. Para activar el `timer`, ejecuta el comando `systemctl --user start podman-auto-start.timer`. 
+
+[NOTE]
+=====
+Si quieres lanzar `podman auto-update` manualmente, puedes ejecutarlo directamente en la terminal con el comando `podman auto-update`.
+=====
+
+==== Test versión 2
+
+Actualizaremos el navegador (F5), y si la aplicación se ha actualizado, veremos la nueva versión del Tetris. En la Terminal que tenemos abierta con el usuario `{qa-user}`, podemos ver también que la imagen ha cambiado haciendo un `podman images` y comparando el `IMAGE ID` con el anterior. 
+
+image::podman_desktop_tetris_app_v2.png[]

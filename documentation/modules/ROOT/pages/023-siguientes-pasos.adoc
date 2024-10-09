@@ -1,0 +1,10 @@
+[#siguientes_pasos]
+== Siguientes pasos
+
+Hemos visto cómo `podman auto-update` busca, para las imágenes que nosotros queramos que estén en ejecución, si hay una versión disponible en el registry. En el caso de que haya una nueva versión, hará un **pull de la imagen** y **actualizará el contenedor** usando la nueva imagen. 
+
+Si esta nueva imagen falla, se hará un **rollback automático** y se ejecutará la última versión que funcionaba correctamente.
+
+Si deseas conocer más nos puedes preguntar durante el evento o bien puedes hablar con el equipo de cuenta de Red Hat en tu empresa y pedirles una sesión con los especialistas de RHEL.
+
+image::graduation.png[]
