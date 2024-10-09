@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Recursos sobre Podman auto-update :: Despliegue y gestión de contenedores en RHEL</title>
+    <link rel="canonical" href="https://redhat-iberia.github.io/microlab-podman/microlab-podman/030-recursos.html">
+    <link rel="prev" href="023-siguientes-pasos.html#siguientes_pasos">
+    <meta name="generator" content="Antora 3.0.0">
+    <link rel="stylesheet" href="../_/css/site.css">
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://developers.redhat.com" target="_blank"><img src="../_/img/RHDLogo.svg" height="40px" alt="Red Hat Developer Program"></a>
+      <a class="navbar-item" style="font-size: 24px; color: white" href="https://redhat-iberia.github.io/microlab-podman">Despliegue y gestión de contenedores en RHEL</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="https://developers.redhat.com/ebooks/" target="_blank">Books</a>
+        <a class="navbar-item" href="https://developers.redhat.com/cheatsheets/" target="_blank">Cheat Sheets</a>
+        <a class="navbar-item" href="https://developers.redhat.com/events/" target="_blank">Upcoming Events</a>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">More Tutorials</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="https://redhat-developer-demos.github.io/kubernetes-tutorial/" target="_blank">Kubernetes</a>
+            <a class="navbar-item" href="https://redhat-developer-demos.github.io/istio-tutorial/" target="_blank">Istio</a>
+            <a class="navbar-item" href="https://redhat-developer-demos.github.io/quarkus-tutorial/" target="_blank">Quarkus</a>
+            <a class="navbar-item" href="https://redhat-developer-demos.github.io/knative-tutorial/" target="_blank">Knative</a>
+            <a class="navbar-item" href="https://redhat-developer-demos.github.io/tekton-tutorial/" target="_blank">Tekton</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="microlab-podman" data-version="master">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="index.html"></a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="01-introduccion.html">1. Introducción</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="01-introduccion.html#descripcion">Descripcion</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="01-introduccion.html#app">Tetris</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="01-introduccion.html#ulab">Microlaboratio</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="02-caso-practico.html">2. Caso práctico</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="021-podman-auto-update.html">Podman auto-update</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="021-podman-auto-update.html#funcionamiento">Funcionamiento</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="021-podman-auto-update.html#systemd">Systemd Unit y Timer</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="021-podman-auto-update.html#dtetris">Tetris</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="4">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="021-podman-auto-update.html#despliegue">Despliegue</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="5">
+    <a class="nav-link" href="021-podman-auto-update.html#build">Build</a>
+  </li>
+  <li class="nav-item" data-depth="5">
+    <a class="nav-link" href="021-podman-auto-update.html#tag">Tag</a>
+  </li>
+  <li class="nav-item" data-depth="5">
+    <a class="nav-link" href="021-podman-auto-update.html#push">Push</a>
+  </li>
+  <li class="nav-item" data-depth="5">
+    <a class="nav-link" href="021-podman-auto-update.html#run">Run</a>
+  </li>
+  <li class="nav-item" data-depth="5">
+    <a class="nav-link" href="021-podman-auto-update.html#test">Test</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="021-podman-auto-update.html#actualizacion">Actualización</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="022-automatic-rollbacks.html">Rollbacks automáticos</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="022-automatic-rollbacks.html#rollback_funcionamiento">Funcionamiento</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="022-automatic-rollbacks.html#rollback_tetris">Rollback del Tetris</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="022-automatic-rollbacks.html#rollback_automatico">Rollback automático</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="022-automatic-rollbacks.html#rollback_manual">Rollback manual</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="023-siguientes-pasos.html#siguientes_pasos">Siguientes pasos</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item is-current-page" data-depth="1">
+    <a class="nav-link" href="030-recursos.html">Recursos</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="index.html">Despliegue y gestión de contenedores en RHEL</a></li>
+    <li><a href="030-recursos.html">Recursos</a></li>
+  </ul>
+</nav>
+  <div class="edit-this-page"><a href="https://github.com/redhat-iberia/microlab-podman/edit/master/documentation/modules/ROOT/pages/030-recursos.adoc">Edit this Page</a></div>
+  </div>
+  <div class="content">
+<article class="doc">
+<h1 class="page">Recursos sobre Podman auto-update</h1>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://www.redhat.com/sysadmin/podman-auto-updates-rollbacks">How to use auto-updates and rollbacks in Podman</a></p>
+</li>
+<li>
+<p><a href="https://www.redhat.com/sysadmin/podman-features-3">5 cool features to automate Podman containers and pods</a></p>
+</li>
+<li>
+<p><a href="https://docs.podman.io/en/latest/markdown/podman-auto-update.1.html">Podman auto-update - Documentation</a></p>
+</li>
+</ul>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="023-siguientes-pasos.html#siguientes_pasos">Siguientes pasos</a></span>
+</nav>
+</article>
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <a class="rhd-logo" href="https://developers.redhat.com" target="_blank"></div>
+</footer>
+<script src="../_/js/vendor/clipboard.js"></script>
+<script src="../_/js/site.js"></script>
+<script async src="../_/js/vendor/highlight.js"></script>
+  </body>
+</html>
