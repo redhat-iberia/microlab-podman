@@ -47,6 +47,10 @@ NOTE: El timer de systemd es el programador de unidades de systemd. Por defecto,
 [#despliege]
 === Despliegue
 
+Para conectarnos a la máquina que utilizaremos en el laboratorio pincharemos en el icono **Launch Podman VM Console** en la barra de herramientas, esto abrirá una consola con la máquina virtual donde iniciaremos sesión con el usario **student** y password **root**:
+
+image::podman-vnc.png[]
+
 Vamos a construir y desplegar la imagen de Tetris `v1.0` usando `Podman Desktop`. Para ello,  abriremos la aplicación `Podman Desktop`: 
 
 1. Haz click en `Actividades`
