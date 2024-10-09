@@ -3,9 +3,10 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Despliegue y gestión de contenedores en RHEL :: Despliegue y gestión de contenedores en RHEL</title>
-    <link rel="canonical" href="https://redhat-iberia.github.io/rhel-containers/rhel-containers/index.html">
-    <link rel="next" href="01-introduccion.html">
+    <title>Untitled :: Despliegue y gestión de contenedores en RHEL</title>
+    <link rel="canonical" href="https://redhat-iberia.github.io/rhel-containers/rhel-containers/023-siguientes-pasos.html">
+    <link rel="prev" href="022-automatic-rollbacks.html">
+    <link rel="next" href="030-recursos.html">
     <meta name="generator" content="Antora 3.0.0">
     <link rel="stylesheet" href="../_/css/site.css">
   </head>
@@ -136,7 +137,7 @@
 </ul>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="023-siguientes-pasos.html#siguientes_pasos">Siguientes pasos</a>
+    <a class="nav-link" href="#siguientes_pasos">Siguientes pasos</a>
   </li>
 </ul>
   </li>
@@ -154,147 +155,40 @@
 <main class="article">
 <div class="toolbar" role="navigation">
 <button class="nav-toggle"></button>
-  <a href="index.html" class="home-link is-current"></a>
+  <a href="index.html" class="home-link"></a>
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="index.html">Despliegue y gestión de contenedores en RHEL</a></li>
+    <li><a href="02-caso-practico.html">2. Caso práctico</a></li>
+    <li><a href="#siguientes_pasos">Siguientes pasos</a></li>
   </ul>
 </nav>
-  <div class="edit-this-page"><a href="https://github.com/redhat-iberia/microlab-podman/edit/master/documentation/modules/ROOT/pages/index.adoc">Edit this Page</a></div>
+  <div class="edit-this-page"><a href="https://github.com/redhat-iberia/microlab-podman/edit/master/documentation/modules/ROOT/pages/023-siguientes-pasos.adoc">Edit this Page</a></div>
   </div>
   <div class="content">
 <article class="doc">
-<h1 class="page">Despliegue y gestión de contenedores en RHEL</h1>
-<div id="preamble">
+<div class="sect1">
+<h2 id="siguientes_pasos"><a class="anchor" href="#siguientes_pasos"></a>Siguientes pasos</h2>
 <div class="sectionbody">
+<div class="paragraph">
+<p>Hemos visto cómo <code>podman auto-update</code> busca, para las imágenes que nosotros queramos que estén en ejecución, si hay una versión disponible en el registry. En el caso de que haya una nueva versión, hará un <strong>pull de la imagen</strong> y <strong>actualizará el contenedor</strong> usando la nueva imagen.</p>
+</div>
+<div class="paragraph">
+<p>Si esta nueva imagen falla, se hará un <strong>rollback automático</strong> y se ejecutará la última versión que funcionaba correctamente.</p>
+</div>
+<div class="paragraph">
+<p>Si deseas conocer más nos puedes preguntar durante el evento o bien puedes hablar con el equipo de cuenta de Red Hat en tu empresa y pedirles una sesión con los especialistas de RHEL.</p>
+</div>
 <div class="imageblock">
 <div class="content">
-<img src="_images/connect.png" alt="connect">
+<img src="_images/graduation.png" alt="graduation">
 </div>
-</div>
-<div class="paragraph">
-<p>En este microlaboratorio, podraś explorar el despliegue y la gestión de contenedores en RHEL 9 usando Podman en la línea de comandos (CLI); y de manera gráfica, con Podman Desktop.</p>
-</div>
-<div class="paragraph">
-<p>En este workshop la parte práctica que tiene que realizar el alumno vendrá indicada de la siguiente forma:</p>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-<div class="paragraph">
-<p>Ejemplo práctico para que lo haga el alumno.</p>
-</div>
-</td>
-</tr>
-</table>
-</div>
-</div>
-</div>
-<div class="sect1 tiles browse">
-<h2>Contenido</h2>
-<div class="sectionbody">
-<div class="ulist">
-<div class="title"><a href="01-introduccion.html" class="xref page">Introducción</a></div>
-<ul>
-<li>
-<p><a href="01-introduccion.html#descripcion" class="xref page">Descripcion</a></p>
-</li>
-<li>
-<p><a href="01-introduccion.html#app" class="xref page">Tetris</a></p>
-</li>
-<li>
-<p><a href="01-introduccion.html#ulab" class="xref page">Microlaboratio</a></p>
-</li>
-</ul>
-</div>
-<div class="ulist tile">
-<div class="title"><a href="02-caso-practico.html" class="xref page">Caso práctico</a></div>
-<ul>
-<li>
-<p><a href="021-podman-auto-update.html#podman-auto-update" class="xref page">Podman auto-update</a></p>
-<div class="ulist">
-<ul>
-<li>
-<p><a href="021-podman-auto-update.html#funcionamiento" class="xref page">Funcionamiento de Podman auto-update</a></p>
-<div class="ulist">
-<ul>
-<li>
-<p><a href="021-podman-auto-update.html#systemd" class="xref page">Systemd Unit y Timer</a></p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p><a href="021-podman-auto-update.html#dtetris" class="xref page">Tetris</a></p>
-<div class="ulist">
-<ul>
-<li>
-<p><a href="021-podman-auto-update.html#despliegue" class="xref page">Despliegue</a></p>
-<div class="ulist">
-<ul>
-<li>
-<p><a href="021-podman-auto-update.html#build" class="xref page">Build</a></p>
-</li>
-<li>
-<p><a href="021-podman-auto-update.html#tag" class="xref page">Tag</a></p>
-</li>
-<li>
-<p><a href="021-podman-auto-update.html#push" class="xref page">Push</a></p>
-</li>
-<li>
-<p><a href="021-podman-auto-update.html#run" class="xref page">Run</a></p>
-</li>
-<li>
-<p><a href="021-podman-auto-update.html#test" class="xref page">Test</a></p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p><a href="021-podman-auto-update.html#actualizacion" class="xref page">Actualización</a></p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p><a href="022-automatic-rollbacks.html" class="xref page">Rollbacks automáticos</a></p>
-<div class="ulist">
-<ul>
-<li>
-<p><a href="022-automatic-rollbacks.html#rollback_funcionamiento" class="xref page">Funcionamiento</a></p>
-</li>
-<li>
-<p><a href="022-automatic-rollbacks.html#rollback_tetris" class="xref page">Rollback del Tetris</a></p>
-<div class="ulist">
-<ul>
-<li>
-<p><a href="022-automatic-rollbacks.html#rollback_automatico" class="xref page">Rollback automático</a></p>
-</li>
-<li>
-<p><a href="022-automatic-rollbacks.html#rollback_manual" class="xref page">Rollback manual</a></p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p><a href="023-siguientes-pasos.html#siguientes_pasos" class="xref page">Siguientes pasos</a></p>
-</li>
-</ul>
 </div>
 </div>
 </div>
 <nav class="pagination">
-  <span class="next"><a href="01-introduccion.html">1. Introducción</a></span>
+  <span class="prev"><a href="022-automatic-rollbacks.html">Rollbacks automáticos</a></span>
+  <span class="next"><a href="030-recursos.html">Recursos</a></span>
 </nav>
 </article>
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
