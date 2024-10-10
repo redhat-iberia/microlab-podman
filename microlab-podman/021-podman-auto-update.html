@@ -304,7 +304,7 @@ El timer de systemd es el programador de unidades de systemd. Por defecto,  <cod
 <p>En el formulario desplegado, seleccionamos el <code>Containerfile</code> haciendo click en la carpeta que sale en la línea de <code>Containerfile path</code>.</p>
 </div>
 <div class="paragraph">
-<p>En el navegador de archivos, seleccionamos a la izquierda <code>Carpeta Personal</code>, y a la derecha <code>tetris</code> &#8594; <code>v1.0</code>, y seleccionamos el archivo <code>Containerfile</code>. Como nombre de imagen, en el campo <code>Image Name</code>, pondremos <code>registry.lab.melmac.univ:5000/tetris:v1</code>.</p>
+<p>En el navegador de archivos, seleccionamos a la izquierda <code>Carpeta Personal</code>, y a la derecha <code>tetris</code> &#8594; <code>v1.0</code>, y seleccionamos el archivo <code>Containerfile</code>. Como nombre de imagen, en el campo <code>Image Name</code>, pondremos <code>tetris</code>.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -318,7 +318,7 @@ El timer de systemd es el programador de unidades de systemd. Por defecto,  <cod
 <div class="sect3">
 <h4 id="tag"><a class="anchor" href="#tag"></a>Tag</h4>
 <div class="paragraph">
-<p>Cuando construyamos una nueva imagen, le añadiremos la tag de <code>latest</code>. Para desplegar la imagen, abrimos la Terminal, y ejecutaremos el comando:</p>
+<p>Cuando construyamos una nueva imagen, le añadiremos la tag de <code>v1</code> y <code>latest</code>. Para desplegar la imagen, abrimos la Terminal, y ejecutaremos el comando:</p>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -328,7 +328,8 @@ El timer de systemd es el programador de unidades de systemd. Por defecto,  <cod
 </td>
 <td class="content">
 <div class="paragraph">
-<p><code>$ podman tag registry.lab.melmac.univ:5000/tetris:v1 registry.lab.melmac.univ:5000/tetris:latest</code></p>
+<p><code>$ podman tag tetris registry.lab.melmac.univ:5000/tetris:v1</code><br>
+<code>$ podman tag registry.lab.melmac.univ:5000/tetris:v1 registry.lab.melmac.univ:5000/tetris:latest</code></p>
 </div>
 </td>
 </tr>
@@ -413,7 +414,8 @@ El timer de systemd es el programador de unidades de systemd. Por defecto,  <cod
 </td>
 <td class="content">
 <div class="paragraph">
-<p><code>$ podman tag registry.lab.melmac.univ:5000/tetris:v2 registry.lab.melmac.univ:5000/tetris:latest</code><br>
+<p><code>$ podman tag tetris registry.lab.melmac.univ:5000/tetris:v2</code><br>
+<code>$ podman tag registry.lab.melmac.univ:5000/tetris:v2 registry.lab.melmac.univ:5000/tetris:latest</code><br>
 <code>$ podman push registry.lab.melmac.univ:5000/tetris:v2</code><br>
 <code>$ podman push registry.lab.melmac.univ:5000/tetris:latest</code></p>
 </div>
@@ -441,7 +443,7 @@ El timer de systemd es el programador de unidades de systemd. Por defecto,  <cod
 <div class="sect3">
 <h4 id="_timer"><a class="anchor" href="#_timer"></a>Timer</h4>
 <div class="paragraph">
-<p>Se ha creado un <code>timer</code> para lanzar <code>podman auto-update</code> cada 1 minuto, pero no está activo. Para activar el <code>timer</code>, ejecuta el comando <code>systemctl --user start podman-auto-start.timer</code>.</p>
+<p>Se ha creado un <code>timer</code> para lanzar <code>podman auto-update</code> cada 1 minuto, pero no está activo. Para activar el <code>timer</code>, ejecuta el comando <code>systemctl --user start podman-auto-update.timer</code>.</p>
 </div>
 <div class="admonitionblock note">
 <table>
