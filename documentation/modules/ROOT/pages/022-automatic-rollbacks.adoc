@@ -39,6 +39,7 @@ Para ello, ejecutaremos los siguientes comandos:
 
 [TIP]
 ====
+`$ podman tag tetris {registry}/tetris:v3` +
 `$ podman tag {registry}/tetris:v3 {registry}/tetris:latest` +
 `$ podman push {registry}/tetris:v3` +
 `$ podman push {registry}/tetris:latest`

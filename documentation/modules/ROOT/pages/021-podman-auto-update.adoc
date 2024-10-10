@@ -66,7 +66,7 @@ image::podman_desktop_images.png[]
 
 En el formulario desplegado, seleccionamos el `Containerfile` haciendo click en la carpeta que sale en la línea de `Containerfile path`. 
 
-En el navegador de archivos, seleccionamos a la izquierda `Carpeta Personal`, y a la derecha `tetris` -> `v1.0`, y seleccionamos el archivo `Containerfile`. Como nombre de imagen, en el campo `Image Name`, pondremos `{registry}/tetris:v1`.
+En el navegador de archivos, seleccionamos a la izquierda `Carpeta Personal`, y a la derecha `tetris` -> `v1.0`, y seleccionamos el archivo `Containerfile`. Como nombre de imagen, en el campo `Image Name`, pondremos `tetris`.
 
 image::podman_desktop_container_build.png[]
 
@@ -75,10 +75,11 @@ Finalmente construimos la imagen haciendo click en `Build`.
 [#tag]
 ==== Tag
 
-Cuando construyamos una nueva imagen, le añadiremos la tag de `latest`. Para desplegar la imagen, abrimos la Terminal, y ejecutaremos el comando:
+Cuando construyamos una nueva imagen, le añadiremos la tag de `v1` y `latest`. Para desplegar la imagen, abrimos la Terminal, y ejecutaremos el comando:
 
 [TIP,subs=attributes+]
 =====
+`$ podman tag tetris {registry}/tetris:v1` +
 `$ podman tag {registry}/tetris:v1 {registry}/tetris:latest`
 =====
 
@@ -125,6 +126,7 @@ Repetiremos los pasos realizados para el depliege del Tetris, pero usando en el 
 
 [TIP]
 =====
+`$ podman tag tetris {registry}/tetris:v2` +
 `$ podman tag {registry}/tetris:v2 {registry}/tetris:latest` +
 `$ podman push {registry}/tetris:v2` +
 `$ podman push {registry}/tetris:latest`
@@ -139,7 +141,7 @@ Con el usuario `qa` (`sudo su - qa`), puedes ver con el comando `podman images` 
 
 ==== Timer
 
-Se ha creado un `timer` para lanzar `podman auto-update` cada 1 minuto, pero no está activo. Para activar el `timer`, ejecuta el comando `systemctl --user start podman-auto-start.timer`. 
+Se ha creado un `timer` para lanzar `podman auto-update` cada 1 minuto, pero no está activo. Para activar el `timer`, ejecuta el comando `systemctl --user start podman-auto-update.timer`. 
 
 [NOTE]
 =====
